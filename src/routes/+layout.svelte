@@ -1,9 +1,45 @@
-<script>
-	import Navbar from '$lib/components/Navbar.svelte';
+<script lang="ts">
+	import Navbar from '$lib/components/nav/Navbar.svelte';
 	import '../app.pcss';
+	import {
+		ChartPieSolid,
+		GridSolid,
+		UserSolid,
+		ArrowRightToBracketOutline,
+		EditSolid
+	} from 'flowbite-svelte-icons';
+	import type { Route } from '../types';
+
+	const routes: Route[] = [
+		{
+			label: 'Dashboard',
+			path: '/',
+			icon: ChartPieSolid
+		},
+		{
+			label: 'Mes repas',
+			path: '/',
+			icon: GridSolid
+		},
+		{
+			label: 'Mon programme',
+			path: '/',
+			icon: UserSolid
+		},
+		{
+			label: 'Historique des séances',
+			path: '/',
+			icon: EditSolid
+		},
+		{
+			label: 'Paramètres',
+			path: '/',
+			icon: ArrowRightToBracketOutline
+		}
+	];
 </script>
 
-<Navbar />
+<Navbar {routes} />
 <slot />
 
 <style lang="css">
