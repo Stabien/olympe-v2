@@ -1,27 +1,39 @@
 <script lang="ts">
-	import { Toggle } from 'flowbite-svelte';
+	import { Button } from 'flowbite-svelte';
 	import AppInput from '../base/AppInput.svelte';
 	import AppSelect from '../base/AppSelect.svelte';
 	import { ExerciceColumnTypes, type ExerciseColumn } from '../../../types';
 
 	const columnTypes = [
-		{ name: 'Distance', value: ExerciceColumnTypes.Distance },
-		{ name: 'Vitesse (km/h)', value: ExerciceColumnTypes.Speed },
-		{ name: 'Temps (s)', value: ExerciceColumnTypes.Time },
-		{ name: 'Poids (kg)', value: ExerciceColumnTypes.Weight }
+		{ name: 'Heures', value: ExerciceColumnTypes.Hours },
+		{ name: 'Kg', value: ExerciceColumnTypes.Kg },
+		{ name: 'Km', value: ExerciceColumnTypes.Km },
+		{ name: 'Km/h', value: ExerciceColumnTypes.KmPerHour },
+		{ name: 'Minutes', value: ExerciceColumnTypes.Minutes },
+		{ name: 'Minutes/km', value: ExerciceColumnTypes.MinutePerKm },
+		{ name: 'Nombre simple', value: ExerciceColumnTypes.Number },
+		{ name: 'Secondes', value: ExerciceColumnTypes.Secondes }
 	];
 
 	let columns: ExerciseColumn[] = [
 		{
+			name: 'Poids',
+			type: ExerciceColumnTypes.Kg
+		},
+		{
 			name: 'Temps de repos',
-			type: columnTypes[0]
+			type: ExerciceColumnTypes.Minutes
+		},
+		{
+			name: 'Durée',
+			type: ExerciceColumnTypes.Hours
 		}
 	];
 </script>
 
 {#each columns as column, index}
-	<div class="flex flex-row justify-between">
-		<div class="flex w-2/3 flex-col sm:flex-row sm:space-x-3">
+	<div class="flex flex-row justify-between py-1">
+		<div class="flex w-3/4 flex-col sm:flex-row sm:space-x-6">
 			<AppInput
 				label="Nom de la colonne"
 				id="input-column-name-{index}"
@@ -33,12 +45,12 @@
 				id="input-column-type-{index}"
 				type="select"
 				items={columnTypes}
-				value={column.type}
+				bind:selected={column.type}
 				defaultSelected={column.type}
 				placeholder=""
 				divClass="w-full"
 			/>
 		</div>
-		<Toggle class="cursor-pointer" />
+		<Button class="mb-0 mt-auto h-fit" color="alternative">Retirer</Button>
 	</div>
 {/each}

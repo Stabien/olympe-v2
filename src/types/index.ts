@@ -11,24 +11,16 @@ export interface SelectOption {
 
 export interface ExerciseColumn {
   name: string
-  type: {
-    name: string
-    value: ExerciceColumnTypes
-  }
+  type: ExerciceColumnTypes
 }
 
 export enum ExerciceColumnTypes {
-  Weight = 'WEIGHT',
-  Time = 'TIME',
-  Speed = 'SPEED',
-  Distance = 'DISTANCE'
-}
-
-export enum UnitOfMeasurement {
+  Hours = 'HOURS',
   Kg = 'KG',
-  Min = 'MIN',
-  Sec = 'SEC',
-  Mile = 'MILE',
   Km = 'KM',
-  Pound = 'POUND'
+  KmPerHour = 'KMPERHOUR',
+  Minutes = 'MINUTES',
+  MinutePerKm = 'MINUTEPERKM',
+  Number = 'NUMBER',
+  Secondes = 'SECONDES',
 }
