@@ -10,22 +10,27 @@
 
 <Sidebar
 	{activeUrl}
-	class="fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform sm:translate-x-0"
+	class="z-40 h-screen w-64 -translate-x-full transition-transform sm:translate-x-0"
 >
-	<SidebarWrapper class="h-full">
-		<SidebarGroup>
-			<SidebarItem label="Olympe">
+	<SidebarWrapper class="h-full p-0">
+		<SidebarGroup class="mt-3">
+			<SidebarItem label="Olympe" class="rounded-none px-6 py-3">
 				<RocketSolid slot="icon" />
 			</SidebarItem>
 		</SidebarGroup>
-		<SidebarGroup border>
+		<SidebarGroup border class="space-y-0">
 			{#each routes as route}
-				<SidebarItem label={route.label}>
-					<svelte:component
-						this={route.icon}
-						slot="icon"
-						class="mb-1 h-5 w-5 text-gray-500 group-hover:text-primary-600 dark:text-gray-400 dark:group-hover:text-primary-500"
-					/>
+				<SidebarItem
+					label={route.label}
+					class="duration-50 space-0 m-0 rounded-none px-6 py-4 hover:bg-slate-100 dark:text-gray-400 dark:hover:text-primary-500"
+					href={route.path}
+					active={activeUrl === route.path}
+					activeClass="flex items-center text-base bg-slate-100 text-primary-600"
+					nonActiveClass="flex items-center text-base text-black-300"
+				>
+					<svelte:fragment slot="icon">
+						<svelte:component this={route.icon} />
+					</svelte:fragment>
 				</SidebarItem>
 			{/each}
 		</SidebarGroup>

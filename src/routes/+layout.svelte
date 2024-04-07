@@ -13,22 +13,22 @@
 	const routes: Route[] = [
 		{
 			label: 'Dashboard',
-			path: '/',
+			path: '/dashboard',
 			icon: ChartPieSolid
 		},
 		{
 			label: 'Mes repas',
-			path: '/',
+			path: '/meals',
 			icon: GridSolid
 		},
 		{
 			label: 'Mon programme',
-			path: '/',
+			path: '/program',
 			icon: UserSolid
 		},
 		{
-			label: 'Historique des séances',
-			path: '/',
+			label: 'Mes séances',
+			path: '/sessions',
 			icon: EditSolid
 		},
 		{
@@ -39,13 +39,16 @@
 	];
 </script>
 
-<Navbar {routes} />
-<slot />
+<main class="flex h-full w-full flex-row">
+	<Navbar {routes} />
+	<section class="w-full px-12 py-5">
+		<slot />
+	</section>
+</main>
 
 <style lang="css">
 	:global(body) {
 		font-family: 'Roboto';
-		padding: 10px;
 	}
 
 	:global(.pac-container) {
