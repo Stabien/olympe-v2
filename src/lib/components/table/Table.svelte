@@ -8,29 +8,34 @@
 		TableHeadCell
 	} from 'flowbite-svelte';
 
-	let searchTerm = '';
-	let items = [
-		{ date: new Date(), exercise: 'Dips lestés', reps: [8, 8, 8, 7], weight: 25 },
-		{ date: new Date(), exercise: 'Tractions', reps: [8, 8, 8, 7], weight: 25 },
-		{ date: new Date(), exercise: 'Levé de jambes', reps: [8, 8, 8, 7], weight: 25 },
-		{ date: new Date(), exercise: 'Pistol squats', reps: [8, 8, 8, 7], weight: 25 }
-	];
+  interface Row {
+    date: string
+    [key: string]: string
+  }
+
+  export let columns: string[] = ['date', 'poids', 'temps de repos']
+  export let rows: Row[] = [
+    {
+      date: '08/04/2024',
+      'poids': '25 kg',
+      'temps de repos': '1m30'
+    }
+  ]
+
 </script>
 
-<Table placeholder="Search by maker name" bind:inputValue={searchTerm} hoverable={true} shadow>
+<Table hoverable={true} shadow>
 	<TableHead>
-		<TableHeadCell>Date</TableHeadCell>
-		<TableHeadCell>Exercice</TableHeadCell>
-		<TableHeadCell>Répétitions</TableHeadCell>
-		<TableHeadCell>Poids</TableHeadCell>
+    {#each columns as column}
+		  <TableHeadCell>{column}</TableHeadCell>
+    {/each}
 	</TableHead>
 	<TableBody tableBodyClass="divide-y">
-		{#each items as item}
+		{#each rows as row}
 			<TableBodyRow>
-				<TableBodyCell>{item.date.toLocaleDateString()}</TableBodyCell>
-				<TableBodyCell>{item.exercise}</TableBodyCell>
-				<TableBodyCell>{item.reps}</TableBodyCell>
-				<TableBodyCell>{item.weight}</TableBodyCell>
+				{#each columns as column}
+          <TableBodyCell>{row[column]}</TableBodyCell>
+        {/each}
 			</TableBodyRow>
 		{/each}
 	</TableBody>

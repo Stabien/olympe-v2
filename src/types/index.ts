@@ -23,4 +23,5 @@ export enum ExerciceColumnTypes {
   MinutePerKm = 'MINUTEPERKM',
   Number = 'NUMBER',
   Secondes = 'SECONDES',
+  List = 'LIST'
 }
