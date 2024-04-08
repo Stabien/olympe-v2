@@ -15,6 +15,19 @@
 		{ name: 'Secondes', value: ExerciceColumnTypes.Secondes }
 	];
 
+  const addColumn = () => {
+    const newColumn: ExerciseColumn = {
+      name: 'Nouvelle colonne',
+      type: '',
+    }
+
+    columns = [...columns, newColumn]
+  }
+
+  const removeColumn = (columnIndex: number) => {
+    columns = columns.filter((column, index) => columnIndex !== index)
+  }
+
 	let columns: ExerciseColumn[] = [
 		{
 			name: 'Poids',
@@ -51,6 +64,7 @@
 				divClass="w-full"
 			/>
 		</div>
-		<Button class="mb-0 mt-auto h-fit" color="alternative">Retirer</Button>
+		<Button class="mb-0 mt-auto h-fit" color="alternative" on:click={() => removeColumn(index)}>Retirer</Button>
 	</div>
 {/each}
+<Button on:click={addColumn}>+ Ajouter une colonne</Button>

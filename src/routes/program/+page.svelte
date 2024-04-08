@@ -23,7 +23,7 @@
 	<Button class="ml-auto mr-0 block" on:click={openModal}>Ajouter un exercice</Button>
 </header>
 
-<Modal bind:open={isModalOpened} autoclose outsideclose on:close={onCloseModal}>
+<Modal bind:open={isModalOpened} outsideclose on:close={onCloseModal}>
 	<header slot="header" class="w-3/4">
 		<AppInput
 			bind:value={exerciceName}
@@ -33,6 +33,6 @@
 	<ExerciseBuilder />
 	<footer slot="footer" class="ml-auto mr-0 space-x-2">
 		<Button>Enregistrer</Button>
-		<Button color="alternative">Fermer</Button>
+		<Button color="alternative" on:click={onCloseModal}>Fermer</Button>
 	</footer>
 </Modal>

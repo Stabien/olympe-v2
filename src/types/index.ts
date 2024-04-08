@@ -11,7 +11,7 @@ export interface SelectOption {
 
 export interface ExerciseColumn {
   name: string
-  type: ExerciceColumnTypes
+  type: ExerciceColumnTypes | ''
 }
 
 export enum ExerciceColumnTypes {
