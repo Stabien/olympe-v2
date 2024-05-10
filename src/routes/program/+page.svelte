@@ -1,14 +1,15 @@
 <script lang="ts">
 	import AppInput from '$lib/components/base/AppInput.svelte';
-	import ExerciseBuilder from '$lib/components/forms/ExerciseBuilder.svelte';
-	import Table from '$lib/components/table/Table.svelte';
+	import SessionBuilderForm from '$lib/components/session/SessionBuilderForm.svelte';
 	import { Button, Modal } from 'flowbite-svelte';
+	import { defaultProgram } from '../../fixtures';
+	import SessionCard from '$lib/components/session/SessionCard.svelte';
 
 	let isModalOpened = false;
-	let exerciceName = "Nom de l'exercice";
+	let sessionName = 'Nom de la séance';
 
-	const resetExerciceName = () => {
-		exerciceName = "Nom de l'exercice";
+	const resetSessionName = () => {
+		sessionName = 'Nom de la séance';
 	};
 
 	const toggleModal = (isOpened: boolean) => (isModalOpened = isOpened);
@@ -16,26 +17,28 @@
 
 	const onCloseModal = () => {
 		toggleModal(false);
-		resetExerciceName();
+		resetSessionName();
 	};
 </script>
 
 <header class="pb-5">
-	<Button class="ml-auto mr-0 block" on:click={openModal}>Ajouter un exercice</Button>
+	<Button class="ml-auto mr-0 block" on:click={openModal}>Ajouter une séance</Button>
 </header>
 
-<main>
-  <Table />
+<main class="flex flex-row gap-3">
+	{#each defaultProgram as defaultSession}
+		<SessionCard session={defaultSession} />
+	{/each}
 </main>
 
 <Modal bind:open={isModalOpened} outsideclose on:close={onCloseModal}>
 	<header slot="header" class="w-3/4">
 		<AppInput
-			bind:value={exerciceName}
+			bind:value={sessionName}
 			class="rounded-none border-none bg-white p-0 text-lg font-bold text-black focus:ring-0"
 		/>
 	</header>
-	<ExerciseBuilder />
+	<SessionBuilderForm />
 	<footer slot="footer" class="ml-auto mr-0 space-x-2">
 		<Button>Enregistrer</Button>
 		<Button color="alternative" on:click={onCloseModal}>Fermer</Button>

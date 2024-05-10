@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Label, MultiSelect, Select } from 'flowbite-svelte';
+	import { Label, Select } from 'flowbite-svelte';
 	import type { SelectOption } from '../../../types';
 
 	export let label: string = '';

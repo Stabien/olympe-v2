@@ -14,6 +14,25 @@ export interface ExerciseColumn {
   type: ExerciceColumnTypes | ''
 }
 
+export interface Session {
+  name: string
+  exercises: string[]
+}
+
+export interface SessionResult {
+  date: string
+  exercices: ExerciceResult[]
+  comments: string
+}
+
+export interface ExerciceResult {
+  name: string
+  weight: number
+  restTime: number
+  sets: number
+  repetitions: string
+}
+
 export enum ExerciceColumnTypes {
   Hours = 'HOURS',
   Kg = 'KG',
@@ -24,4 +43,26 @@ export enum ExerciceColumnTypes {
   Number = 'NUMBER',
   Secondes = 'SECONDES',
   List = 'LIST'
+}
+
+export interface Food {
+  name: string,
+  kc: number,
+  kj: number,
+  lipids: number,
+  saturatedFattyAcids: number,
+  carbohydrates: number,
+  sugar: number,
+  proteins: number
+}
+
+export interface FoodWithQuantity {
+  food: Food,
+  weight: number,
+  quantity: number
+}
+
+export interface Meal {
+  name: string
+  food: FoodWithQuantity[]
 }

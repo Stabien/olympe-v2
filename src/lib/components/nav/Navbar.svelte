@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { SvelteComponent } from 'svelte';
 	import BottomBar from './BottomBar.svelte';
 	import SideBar from './SideBar.svelte';
 
