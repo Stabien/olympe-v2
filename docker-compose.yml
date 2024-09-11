@@ -1,13 +1,25 @@
 services:
-  back:
+  front:
     build:
-      context: ./back
+      context: ./front
+      dockerfile: ../Dockerfile
     ports:
       - 3000:3000
     volumes:
+      - ./front:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run dev
+
+  back:
+    build:
+      context: ./back
+      dockerfile: ../Dockerfile
+    ports:
+      - 4000:4000
+    volumes:
       - ./back:/usr/src/app
       - /usr/src/app/node_modules
-    command: pnpm start:dev
+    command: npm run start:dev
 
   postgres:
     container_name: postgres
