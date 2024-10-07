@@ -1,26 +1,36 @@
-import { Injectable } from '@nestjs/common';
-import { CreateExerciseDto } from './dto/create-exercise.dto';
-import { UpdateExerciseDto } from './dto/update-exercise.dto';
+import { Injectable } from '@nestjs/common'
+import { CreateExerciseDto } from './dto/create-exercise.dto'
+import { UpdateExerciseDto } from './dto/update-exercise.dto'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Exercise } from './entities/exercise.entity'
+import { Repository } from 'typeorm'
 
 @Injectable()
 export class ExercisesService {
-  create(createExerciseDto: CreateExerciseDto) {
-    return 'This action adds a new exercise';
+  constructor(
+    @InjectRepository(Exercise)
+    private exerciseRepository: Repository<Exercise>,
+  ) {}
+
+  async create(createExerciseDto: CreateExerciseDto): Promise<Exercise> {
+    const exercise = this.exerciseRepository.create(createExerciseDto)
+    return await this.exerciseRepository.save(exercise)
   }
 
-  findAll() {
-    return `This action returns all exercises`;
-  }
+  async update(
+    id: string,
+    updateExerciseDto: UpdateExerciseDto,
+  ): Promise<Exercise> {
+    const exercise = await this.exerciseRepository.findOne({ where: { id } })
+    const updatedExercise = this.exerciseRepository.create({
+      ...exercise,
+      ...updateExerciseDto,
+    })
 
-  findOne(id: number) {
-    return `This action returns a #${id} exercise`;
-  }
-
-  update(id: number, updateExerciseDto: UpdateExerciseDto) {
-    return `This action updates a #${id} exercise`;
+    return await this.exerciseRepository.save(updatedExercise)
   }
 
   remove(id: number) {
-    return `This action removes a #${id} exercise`;
+    return `This action removes a #${id} exercise`
   }
 }
