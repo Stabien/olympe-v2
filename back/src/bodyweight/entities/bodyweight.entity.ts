@@ -1,17 +1,17 @@
-import { User } from 'src/users/entities/user.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/users/entities/user.entity'
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class Bodyweight {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: string
 
   @Column()
-  date: Date;
+  date: Date
 
   @Column()
-  value: number;
+  value: number
 
   @ManyToOne(() => User, (user) => user.bodyweight)
-  user: string;
+  user: string
 }

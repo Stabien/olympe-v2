@@ -1,30 +1,30 @@
-import { User } from 'src/users/entities/user.entity';
+import { User } from 'src/users/entities/user.entity'
 import {
   Column,
   Entity,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-} from 'typeorm';
-import { SessionExercise } from './sessionExercise.entity';
+} from 'typeorm'
+import { SessionExercise } from './sessionExercise.entity'
 
 @Entity()
 export class Session {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: string
 
   @Column()
-  date: Date;
+  date: Date
 
   @Column()
-  tag: string;
+  tag: string
 
   @ManyToOne(() => User, (user) => user.sessions)
-  user: string;
+  user: string
 
   @OneToMany(
     () => SessionExercise,
     (sessionExercise) => sessionExercise.session,
   )
-  sessionExercises: SessionExercise[];
+  sessionExercises: SessionExercise[]
 }

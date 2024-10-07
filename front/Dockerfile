@@ -14,4 +14,4 @@ COPY package.json pnpm-lock.yaml ./
 
 RUN pnpm install
 
-EXPOSE 4000
+EXPOSE 3000

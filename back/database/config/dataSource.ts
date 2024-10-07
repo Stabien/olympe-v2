@@ -1,7 +1,7 @@
-import { DataSource } from 'typeorm';
-import { typeOrmConfig } from './typeorm.config';
-import { config } from 'dotenv';
+import { DataSource } from 'typeorm'
+import { typeOrmConfig } from './typeorm.config'
+import { config } from 'dotenv'
 
-config();
+config()
 
-export default new DataSource(typeOrmConfig());
+export default new DataSource(typeOrmConfig())

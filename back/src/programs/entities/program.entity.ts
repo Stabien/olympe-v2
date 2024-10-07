@@ -1,5 +1,5 @@
-import { Exercise } from 'src/exercises/entities/exercise.entity';
-import { User } from 'src/users/entities/user.entity';
+import { Exercise } from 'src/exercises/entities/exercise.entity'
+import { User } from 'src/users/entities/user.entity'
 import {
   Column,
   Entity,
@@ -7,20 +7,20 @@ import {
   ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
-} from 'typeorm';
+} from 'typeorm'
 
 @Entity()
 export class Program {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: string
 
   @Column()
-  name: string;
+  name: string
 
   @ManyToOne(() => User, (user) => user.programs)
-  user: string;
+  user: string
 
   @ManyToMany(() => Exercise)
   @JoinTable({ name: 'program_exercise' })
-  exercises: Exercise[];
+  exercises: Exercise[]
 }

@@ -1,24 +1,24 @@
-import { User } from 'src/users/entities/user.entity';
+import { User } from 'src/users/entities/user.entity'
 import {
   Column,
   Entity,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-} from 'typeorm';
-import { MealFoodstuff } from './mealFoodstuff.entity';
+} from 'typeorm'
+import { MealFoodstuff } from './mealFoodstuff.entity'
 
 @Entity()
 export class Meal {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: string
 
   @Column()
-  name: string;
+  name: string
 
   @ManyToOne(() => User, (user) => user.meals)
-  user: string;
+  user: string
 
   @OneToMany(() => MealFoodstuff, (mealFoodstuff) => mealFoodstuff.meal)
-  mealFoodstuffs: MealFoodstuff[];
+  mealFoodstuffs: MealFoodstuff[]
 }
