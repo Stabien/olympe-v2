@@ -1,19 +1,22 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { UsersService } from 'src/users/users.service';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
+import { UsersService } from 'src/users/users.service'
+import { compare } from 'bcrypt'
 
 @Injectable()
 export class AuthService {
   constructor(
+    @Inject(UsersService)
     private usersService: UsersService,
     private jwtService: JwtService,
   ) {}
 
   async signIn(email: string, password: string): Promise<{ token: string }> {
-    const user = await this.usersService.findOneBy({ email });
+    const user = await this.usersService.findOneBy({ email })
+    const isPasswordMatching = await compare(password, user?.password ?? '')
 
-    if (user?.password !== password) {
-      throw new UnauthorizedException();
+    if (!isPasswordMatching) {
+      throw new NotFoundException()
     }
 
     return {
@@ -21,6 +24,6 @@ export class AuthService {
         id: user.id,
         email: user.email,
       }),
-    };
+    }
   }
 }
