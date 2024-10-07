@@ -1,32 +1,32 @@
-import { MealFoodstuff } from 'src/meals/entities/mealFoodstuff.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { MealFoodstuff } from 'src/meals/entities/mealFoodstuff.entity'
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class Foodstuff {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: string
 
   @Column()
-  name: string;
+  name: string
 
   @Column()
-  kcal: number;
+  kcal: number
 
   @Column()
-  lipids: number;
+  lipids: number
 
   @Column()
-  carbohydrates: number;
+  carbohydrates: number
 
   @Column()
-  sugar: number;
+  sugar: number
 
   @Column()
-  proteins: number;
+  proteins: number
 
   @Column()
-  image: string;
+  image: string
 
   @OneToMany(() => MealFoodstuff, (mealFoodstuff) => mealFoodstuff.meal)
-  mealFoodstuffs: MealFoodstuff[];
+  mealFoodstuffs: MealFoodstuff[]
 }

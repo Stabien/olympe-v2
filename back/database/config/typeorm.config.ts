@@ -1,6 +1,5 @@
-import { join } from 'path';
-import { DataSourceOptions } from 'typeorm';
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { DataSourceOptions } from 'typeorm'
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
 
 export const typeOrmConfig = (): DataSourceOptions => ({
   type: 'postgres',
@@ -9,8 +8,8 @@ export const typeOrmConfig = (): DataSourceOptions => ({
   username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_DB,
-  entities: [join(__dirname, '**', '*.entity.{ts,js}')],
+  entities: [__dirname + '/../../src/**/*.entity.{ts,js}'],
   migrations: ['src/db/migrations/*{.ts,.js}'],
   synchronize: true,
   namingStrategy: new SnakeNamingStrategy(),
-});
+})

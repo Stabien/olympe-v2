@@ -1,18 +1,18 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Meal } from './meal.entity';
-import { Foodstuff } from 'src/foodstuffs/entities/foodstuff.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Meal } from './meal.entity'
+import { Foodstuff } from 'src/foodstuffs/entities/foodstuff.entity'
 
 @Entity()
 export class MealFoodstuff {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: string
 
   @Column()
-  quantity: number;
+  quantity: number
 
   @ManyToOne(() => Meal, (meal) => meal.mealFoodstuffs)
-  meal: string;
+  meal: string
 
   @ManyToOne(() => Foodstuff, (foodstuff) => foodstuff.mealFoodstuffs)
-  foodstuff: string;
+  foodstuff: string
 }

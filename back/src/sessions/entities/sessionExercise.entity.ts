@@ -1,24 +1,24 @@
-import { Exercise } from 'src/exercises/entities/exercise.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Session } from './session.entity';
+import { Exercise } from 'src/exercises/entities/exercise.entity'
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Session } from './session.entity'
 
 @Entity()
 export class SessionExercise {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: string
 
   @Column()
-  date: Date;
+  date: Date
 
   @Column()
-  weight: number;
+  weight: number
 
   @Column('int', { array: true })
-  sets: number[];
+  sets: number[]
 
   @ManyToOne(() => Session, (session) => session.sessionExercises)
-  session: string;
+  session: string
 
   @ManyToOne(() => Exercise, (exercise) => exercise.sessionExercises)
-  exercise: string;
+  exercise: string
 }

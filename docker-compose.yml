@@ -2,7 +2,7 @@ services:
   front:
     build:
       context: ./front
-      dockerfile: ../Dockerfile
+      dockerfile: ./Dockerfile
     ports:
       - 3000:3000
     volumes:
@@ -13,7 +13,7 @@ services:
   back:
     build:
       context: ./back
-      dockerfile: ../Dockerfile
+      dockerfile: ./Dockerfile
     ports:
       - 4000:4000
     volumes:
@@ -29,9 +29,9 @@ services:
     volumes:
       - postgres_db:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=olympe
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
+      POSTGRES_DB: olympe
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
 
 volumes:
   postgres_db:
