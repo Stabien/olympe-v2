@@ -21,7 +21,7 @@ export class ExercisesService {
     id: string,
     updateExerciseDto: UpdateExerciseDto,
   ): Promise<Exercise> {
-    const exercise = await this.exerciseRepository.findOne({ where: { id } })
+    const exercise = await this.exerciseRepository.findOneBy({ id })
     const updatedExercise = this.exerciseRepository.create({
       ...exercise,
       ...updateExerciseDto,
