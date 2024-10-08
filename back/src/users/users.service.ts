@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { User } from './entities/user.entity'
-import { Repository } from 'typeorm'
+import { FindOptionsWhere, Repository } from 'typeorm'
 import { Exercise } from 'src/exercises/entities/exercise.entity'
 
 @Injectable()
@@ -18,8 +18,8 @@ export class UsersService {
     return await this.userRepository.save(user)
   }
 
-  async findOneBy(where: Record<string, any>): Promise<User> {
-    return this.userRepository.findOne({ where })
+  async findOneBy(findOptionsWhere: FindOptionsWhere<User>): Promise<User> {
+    return this.userRepository.findOneBy(findOptionsWhere)
   }
 
   async findUserExercises(userId: string): Promise<Exercise[]> {
@@ -32,7 +32,7 @@ export class UsersService {
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
-    const user = this.userRepository.findOne({ where: { id } })
+    const user = this.userRepository.findOneBy({ id })
     const updatedUser = this.userRepository.create({
       ...user,
       ...updateUserDto,

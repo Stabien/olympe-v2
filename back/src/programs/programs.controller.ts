@@ -16,8 +16,16 @@ export class ProgramsController {
   constructor(private readonly programsService: ProgramsService) {}
 
   @Post()
-  create(@Body() createProgramDto: CreateProgramDto) {
-    return this.programsService.create(createProgramDto)
+  async create(@Body() createProgramDto: CreateProgramDto) {
+    return await this.programsService.create(createProgramDto)
+  }
+
+  @Post(':programId/exercises/:exerciseId')
+  async addExercise(
+    @Param('programId') programId: string,
+    @Param('exerciseId') exerciseId: string,
+  ) {
+    return await this.programsService.addExercise(programId, exerciseId)
   }
 
   @Get()
@@ -32,7 +40,7 @@ export class ProgramsController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProgramDto: UpdateProgramDto) {
-    return this.programsService.update(+id, updateProgramDto)
+    return this.programsService.update(id, updateProgramDto)
   }
 
   @Delete(':id')

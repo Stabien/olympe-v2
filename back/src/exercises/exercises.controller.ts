@@ -8,16 +8,16 @@ export class ExercisesController {
   constructor(private readonly exercisesService: ExercisesService) {}
 
   @Post()
-  create(@Body() createExerciseDto: CreateExerciseDto) {
-    return this.exercisesService.create(createExerciseDto)
+  async create(@Body() createExerciseDto: CreateExerciseDto) {
+    return await this.exercisesService.create(createExerciseDto)
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateExerciseDto: UpdateExerciseDto,
   ) {
-    return this.exercisesService.update(id, updateExerciseDto)
+    return await this.exercisesService.update(id, updateExerciseDto)
   }
 
   @Delete(':id')
