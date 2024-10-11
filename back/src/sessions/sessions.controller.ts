@@ -16,8 +16,14 @@ export class SessionsController {
   constructor(private readonly sessionsService: SessionsService) {}
 
   @Post()
-  create(@Body() createSessionDto: CreateSessionDto) {
-    return this.sessionsService.create(createSessionDto)
+  async create(@Body() createSessionDto: CreateSessionDto) {
+    const session = await this.sessionsService.create(createSessionDto)
+    await this.sessionsService.addExercises(
+      session.id,
+      createSessionDto.exercises,
+    )
+
+    return session
   }
 
   @Get()

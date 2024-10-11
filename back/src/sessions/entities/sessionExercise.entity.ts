@@ -8,9 +8,6 @@ export class SessionExercise {
   id: string
 
   @Column()
-  date: Date
-
-  @Column()
   weight: number
 
   @Column('int', { array: true })
