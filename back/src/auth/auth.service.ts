@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { UsersService } from 'src/users/users.service'
 import { compare } from 'bcrypt'
@@ -6,7 +6,6 @@ import { compare } from 'bcrypt'
 @Injectable()
 export class AuthService {
   constructor(
-    @Inject(UsersService)
     private usersService: UsersService,
     private jwtService: JwtService,
   ) {}

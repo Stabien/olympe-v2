@@ -9,5 +9,6 @@ import { Exercise } from 'src/exercises/entities/exercise.entity'
   imports: [TypeOrmModule.forFeature([Program, Exercise])],
   controllers: [ProgramsController],
   providers: [ProgramsService],
+  exports: [ProgramsService],
 })
 export class ProgramsModule {}
