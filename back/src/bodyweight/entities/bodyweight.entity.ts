@@ -13,5 +13,5 @@ export class Bodyweight {
   value: number
 
   @ManyToOne(() => User, (user) => user.bodyweight)
-  user: string
+  user: User
 }

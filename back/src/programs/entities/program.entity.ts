@@ -18,7 +18,7 @@ export class Program {
   name: string
 
   @ManyToOne(() => User, (user) => user.programs)
-  user: string
+  user: User
 
   @ManyToMany(() => Exercise)
   @JoinTable({ name: 'program_exercise' })

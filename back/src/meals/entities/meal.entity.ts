@@ -17,7 +17,7 @@ export class Meal {
   name: string
 
   @ManyToOne(() => User, (user) => user.meals)
-  user: string
+  user: User
 
   @OneToMany(() => MealFoodstuff, (mealFoodstuff) => mealFoodstuff.meal)
   mealFoodstuffs: MealFoodstuff[]
