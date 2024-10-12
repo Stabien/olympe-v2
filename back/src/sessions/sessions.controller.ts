@@ -26,14 +26,9 @@ export class SessionsController {
     return session
   }
 
-  @Get()
-  findAll() {
-    return this.sessionsService.findAll()
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.sessionsService.findOne(+id)
+  @Get('/users/:userId')
+  async findByUser(@Param('userId') userId: string) {
+    return await this.sessionsService.findByUser(userId)
   }
 
   @Patch(':id')

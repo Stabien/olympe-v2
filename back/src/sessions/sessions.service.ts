@@ -34,12 +34,18 @@ export class SessionsService {
     return await this.sessionExerciseRepository.insert(newSessionExercises)
   }
 
-  findAll() {
-    return `This action returns all sessions`
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} session`
+  async findByUser(userId: string) {
+    console.log(userId)
+    return await this.sessionRepository.find({
+      relations: {
+        sessionExercises: true,
+      },
+      where: {
+        user: {
+          id: userId,
+        },
+      },
+    })
   }
 
   update(id: number, updateSessionDto: UpdateSessionDto) {

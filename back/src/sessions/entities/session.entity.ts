@@ -20,7 +20,7 @@ export class Session {
   tag: string
 
   @ManyToOne(() => User, (user) => user.sessions)
-  user: string
+  user: User
 
   @OneToMany(
     () => SessionExercise,

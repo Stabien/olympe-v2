@@ -1,5 +1,6 @@
 import { IsDateString, IsNotEmpty, IsString } from 'class-validator'
 import { CreateSessionExerciseDto } from './create-session-exercise.dto'
+import { User } from 'src/users/entities/user.entity'
 
 export class CreateSessionDto {
   @IsDateString()
@@ -9,7 +10,7 @@ export class CreateSessionDto {
   tag: string
 
   @IsString()
-  user: string
+  user: User
 
   @IsNotEmpty()
   exercises: CreateSessionExerciseDto[]
