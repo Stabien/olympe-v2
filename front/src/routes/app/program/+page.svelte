@@ -2,8 +2,9 @@
 	import AppInput from '$lib/components/base/AppInput.svelte';
 	import SessionBuilderForm from '$lib/components/session/SessionBuilderForm.svelte';
 	import { Button, Modal } from 'flowbite-svelte';
-	import { defaultProgram } from '../../fixtures';
+	import { defaultProgram } from '../../../fixtures';
 	import SessionCard from '$lib/components/session/SessionCard.svelte';
+	import AppButton from '$lib/components/base/AppButton.svelte';
 
 	let isModalOpened = false;
 	let sessionName = 'Nom de la séance';
@@ -22,7 +23,7 @@
 </script>
 
 <header class="pb-5">
-	<Button class="ml-auto mr-0 block" on:click={openModal}>Ajouter une séance</Button>
+	<AppButton class="ml-auto mr-0 block" on:click={openModal}>Ajouter une séance</AppButton>
 </header>
 
 <main class="flex flex-row gap-3">
@@ -40,7 +41,7 @@
 	</header>
 	<SessionBuilderForm />
 	<footer slot="footer" class="ml-auto mr-0 space-x-2">
-		<Button>Enregistrer</Button>
-		<Button color="alternative" on:click={onCloseModal}>Fermer</Button>
+		<AppButton>Enregistrer</AppButton>
+		<AppButton color="alternative" on:click={onCloseModal}>Fermer</AppButton>
 	</footer>
 </Modal>

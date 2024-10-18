@@ -3,6 +3,7 @@
 	import AddNewSessionForm from '$lib/components/session/AddNewSessionForm.svelte';
 	import SessionTable from '$lib/components/session/SessionTable.svelte';
 	import ExerciseTable from '$lib/components/exercise/ExerciseTable.svelte';
+	import AppButton from '$lib/components/base/AppButton.svelte';
 
 	let isModalOpened = false;
 	let exerciceName = 'Nom de la séance';
@@ -21,7 +22,7 @@
 </script>
 
 <header class="pb-5">
-	<Button class="ml-auto mr-0 block" on:click={openModal}>Ajouter une séance</Button>
+	<AppButton class="ml-auto mr-0 block" on:click={openModal}>Ajouter une séance</AppButton>
 </header>
 
 <main class="p-8">
@@ -41,7 +42,7 @@
 	</header>
 	<AddNewSessionForm />
 	<footer slot="footer" class="ml-auto mr-0 space-x-2">
-		<Button>Enregistrer</Button>
-		<Button color="alternative" on:click={onCloseModal}>Fermer</Button>
+		<AppButton>Enregistrer</AppButton>
+		<AppButton color="alternative" on:click={onCloseModal}>Fermer</AppButton>
 	</footer>
 </Modal>

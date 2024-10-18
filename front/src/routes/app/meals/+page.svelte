@@ -3,6 +3,7 @@
 	import { Button, Modal } from 'flowbite-svelte';
 	import MealBuilderForm from '$lib/components/meal/MealBuilderForm.svelte';
 	import MealCard from '$lib/components/meal/MealCard.svelte';
+	import AppButton from '$lib/components/base/AppButton.svelte';
 
 	let isModalOpened = false;
 	let mealName = 'Nom du repas';
@@ -21,7 +22,7 @@
 </script>
 
 <header class="pb-5">
-	<Button class="ml-auto mr-0 block" on:click={openModal}>Ajouter un repas</Button>
+	<AppButton class="ml-auto mr-0 block" on:click={openModal}>Ajouter un repas</AppButton>
 </header>
 
 <main class="flex flex-row gap-3">
@@ -37,7 +38,7 @@
 	</header>
 	<MealBuilderForm />
 	<footer slot="footer" class="ml-auto mr-0 space-x-2">
-		<Button>Enregistrer</Button>
-		<Button color="alternative" on:click={onCloseModal}>Fermer</Button>
+		<AppButton>Enregistrer</AppButton>
+		<AppButton color="alternative" on:click={onCloseModal}>Fermer</AppButton>
 	</footer>
 </Modal>
