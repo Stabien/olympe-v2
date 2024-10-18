@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { Button } from 'flowbite-svelte';
-	import AppSelect from '../base/AppSelect.svelte';
 	import AppInput from '../base/AppInput.svelte';
+	import AppButton from '../base/AppButton.svelte';
 
 	const addExercise = () => {
 		const newExercise = {
@@ -38,9 +37,13 @@
 			<AppInput label="Poids (g)" />
 			<AppInput label="Quantité" />
 		</div>
-		<Button class="mb-0 mt-auto h-fit" color="alternative" on:click={() => removeExercise(index)}
-			>Retirer</Button
+		<AppButton
+			class="mb-0 mt-auto h-fit"
+			color="alternative"
+			on:click={() => removeExercise(index)}
 		>
+			Retirer
+		</AppButton>
 	</div>
 {/each}
-<Button on:click={addExercise}>+ Ajouter un aliment</Button>
+<AppButton on:click={addExercise}>+ Ajouter un aliment</AppButton>

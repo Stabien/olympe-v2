@@ -1,4 +1,4 @@
-import type { Meal } from "../types"
+import type { Meal } from "../lib/types"
 
 export const defaultSession = {
   name: 'Séance Push',

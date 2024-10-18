@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Session } from '../../../types';
-	import AppCard from '../base/AppCard.svelte';
+	import type { Session } from '../../types'
+	import AppCard from '../base/AppCard.svelte'
 
-	export let session: Session;
+	export let session: Session
 </script>
 
 <AppCard>

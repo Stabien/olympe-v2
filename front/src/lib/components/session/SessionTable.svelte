@@ -1,6 +1,5 @@
 <script lang="ts">
 	import AppTable from '../base/AppTable.svelte';
-	import Table from '../base/AppTable.svelte';
 
 	export let rows = [
 		{

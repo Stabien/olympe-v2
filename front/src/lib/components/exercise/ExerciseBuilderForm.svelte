@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Button } from 'flowbite-svelte';
-	import AppInput from '../base/AppInput.svelte';
-	import AppSelect from '../base/AppSelect.svelte';
-	import { ExerciceColumnTypes, type ExerciseColumn } from '../../../types';
+	import AppInput from '../base/AppInput.svelte'
+	import AppSelect from '../base/AppSelect.svelte'
+	import { ExerciceColumnTypes, type ExerciseColumn } from '../../types'
+	import AppButton from '../base/AppButton.svelte'
 
 	const columnTypes = [
 		{ name: 'Heures', value: ExerciceColumnTypes.Hours },
@@ -13,20 +13,20 @@
 		{ name: 'Minutes/km', value: ExerciceColumnTypes.MinutePerKm },
 		{ name: 'Nombre simple', value: ExerciceColumnTypes.Number },
 		{ name: 'Secondes', value: ExerciceColumnTypes.Secondes }
-	];
+	]
 
-  const addColumn = () => {
-    const newColumn: ExerciseColumn = {
-      name: 'Nouvelle colonne',
-      type: '',
-    }
+	const addColumn = () => {
+		const newColumn: ExerciseColumn = {
+			name: 'Nouvelle colonne',
+			type: ''
+		}
 
-    columns = [...columns, newColumn]
-  }
+		columns = [...columns, newColumn]
+	}
 
-  const removeColumn = (columnIndex: number) => {
-    columns = columns.filter((column, index) => columnIndex !== index)
-  }
+	const removeColumn = (columnIndex: number) => {
+		columns = columns.filter((column, index) => columnIndex !== index)
+	}
 
 	let columns: ExerciseColumn[] = [
 		{
@@ -41,7 +41,7 @@
 			name: 'Durée',
 			type: ExerciceColumnTypes.Hours
 		}
-	];
+	]
 </script>
 
 {#each columns as column, index}
@@ -64,7 +64,9 @@
 				divClass="w-full"
 			/>
 		</div>
-		<Button class="mb-0 mt-auto h-fit" color="alternative" on:click={() => removeColumn(index)}>Retirer</Button>
+		<AppButton class="mb-0 mt-auto h-fit" color="alternative" on:click={() => removeColumn(index)}
+			>Retirer</AppButton
+		>
 	</div>
 {/each}
-<Button on:click={addColumn}>+ Ajouter une colonne</Button>
+<AppButton on:click={addColumn}>+ Ajouter une colonne</AppButton>

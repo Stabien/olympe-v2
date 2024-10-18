@@ -1,4 +1,4 @@
-import { ExerciceColumnTypes } from "../types";
+import { ExerciceColumnTypes } from "../lib/types";
 
 export const columnTypes = {
   [ExerciceColumnTypes.Hours]: 'Heures',

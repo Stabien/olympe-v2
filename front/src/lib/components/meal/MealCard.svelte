@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { computeMealCalories } from '$lib/operations/meal';
-	import { defaultMeal } from '../../../fixtures';
-	import type { Meal } from '../../../types';
-	import AppCard from '../base/AppCard.svelte';
+	import { computeMealCalories } from '$lib/operations/meal'
+	import { defaultMeal } from '../../../fixtures'
+	import type { Meal } from '$lib/types'
+	import AppCard from '$lib/components/base/AppCard.svelte'
 
-	export let meal: Meal = defaultMeal;
+	export let meal: Meal = defaultMeal
 
-	const mealCalories = computeMealCalories(meal);
+	const mealCalories = computeMealCalories(meal)
 </script>
 
 <AppCard>
