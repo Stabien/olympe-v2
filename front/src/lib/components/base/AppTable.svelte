@@ -8,16 +8,15 @@
 		TableBodyRow,
 		TableHead,
 		TableHeadCell
-	} from 'flowbite-svelte';
-	import { ChevronLeftOutline, ChevronRightOutline } from 'flowbite-svelte-icons';
+	} from 'flowbite-svelte'
+	import { ChevronLeftOutline, ChevronRightOutline } from 'flowbite-svelte-icons'
+	import AppButton from './AppButton.svelte'
 
-	export let columns: any[] = [];
-
-	export let rows: Record<string, any>[] = [];
-
-	export let hasActionButton: boolean = false;
-	export let onActionButtonClick: (() => void) | undefined = undefined;
-	export let actionButtonLabel: string | undefined = undefined;
+	export let columns: any[] = []
+	export let rows: Record<string, any>[] = []
+	export let hasActionButton: boolean = false
+	export let onActionButtonClick: (() => void) | undefined = undefined
+	export let actionButtonLabel: string | undefined = undefined
 </script>
 
 <Table hoverable={true} shadow>
@@ -38,7 +37,7 @@
 				{#if hasActionButton}
 					<TableBodyCell tdClass="w-fit pr-3">
 						<div class="mx-auto mr-0 w-fit">
-							<Button on:click={onActionButtonClick} size="xs">{actionButtonLabel}</Button>
+							<AppButton on:click={onActionButtonClick} size="xs">{actionButtonLabel}</AppButton>
 						</div>
 					</TableBodyCell>
 				{/if}

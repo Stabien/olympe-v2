@@ -1,17 +1,17 @@
 <script lang="ts">
-	import { Label, Select } from 'flowbite-svelte';
-	import type { SelectOption } from '../../../types';
+	import { Label, Select } from 'flowbite-svelte'
+	import type { SelectOption } from '$lib/types'
 
-	export let label: string = '';
-	export let id: string = '';
-	export let selected: any;
-	export let items: SelectOption[] = [];
-	export let defaultSelected: string | undefined = undefined;
-	export let divClass: string = '';
+	export let label: string = ''
+	export let id: string = ''
+	export let selected: any
+	export let items: SelectOption[] = []
+	export let defaultSelected: string | undefined = undefined
+	export let divClass: string = ''
 
 	const isSelected = (item: SelectOption) => {
-		return item.value === defaultSelected;
-	};
+		return item.value === defaultSelected
+	}
 </script>
 
 <div class="flex flex-col {divClass}">
