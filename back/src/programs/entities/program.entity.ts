@@ -1,4 +1,5 @@
 import { Exercise } from 'src/exercises/entities/exercise.entity'
+import { Session } from 'src/sessions/entities/session.entity'
 import { User } from 'src/users/entities/user.entity'
 import {
   Column,
@@ -6,6 +7,7 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 
@@ -23,4 +25,7 @@ export class Program {
   @ManyToMany(() => Exercise)
   @JoinTable({ name: 'program_exercise' })
   exercises: Exercise[]
+
+  @OneToMany(() => Session, (session) => session.program)
+  sessions: Session[]
 }

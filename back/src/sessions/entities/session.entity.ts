@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import { SessionExercise } from './sessionExercise.entity'
+import { Program } from 'src/programs/entities/program.entity'
 
 @Entity()
 export class Session {
@@ -21,6 +22,9 @@ export class Session {
 
   @ManyToOne(() => User, (user) => user.sessions)
   user: User
+
+  @ManyToOne(() => Program, (program) => program.sessions)
+  program: Program
 
   @OneToMany(
     () => SessionExercise,

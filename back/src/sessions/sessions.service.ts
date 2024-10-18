@@ -35,7 +35,6 @@ export class SessionsService {
   }
 
   async findByUser(userId: string) {
-    console.log(userId)
     return await this.sessionRepository.find({
       relations: {
         sessionExercises: true,
@@ -48,8 +47,18 @@ export class SessionsService {
     })
   }
 
-  update(id: number, updateSessionDto: UpdateSessionDto) {
-    return `This action updates a #${id} session`
+  async update(id: string, updateSessionDto: UpdateSessionDto) {
+    const session = await this.sessionRepository.find({
+      where: { id },
+      relations: { sessionExercises: true },
+    })
+
+    const updatedSession = this.sessionRepository.create({
+      ...session,
+      ...updateSessionDto,
+    })
+
+    return await this.sessionRepository.save(updatedSession)
   }
 
   remove(id: number) {

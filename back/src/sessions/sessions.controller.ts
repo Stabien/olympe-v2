@@ -33,7 +33,7 @@ export class SessionsController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateSessionDto: UpdateSessionDto) {
-    return this.sessionsService.update(+id, updateSessionDto)
+    return this.sessionsService.update(id, updateSessionDto)
   }
 
   @Delete(':id')
