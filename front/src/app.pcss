@@ -1,4 +1,37 @@
 /* Write your global styles here, in PostCSS syntax */
 @tailwind base;
 @tailwind components;
-@tailwind utilities
+@tailwind utilities;
+
+body {
+  font-family: 'Inter';
+  color: "#3F3F3F"
+}
+
+.pac-container {
+  font-family: 'Roboto';
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.pac-item {
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.pac-item-query {
+  font-size: 14px;
+}
+
+.pac-matched {
+  color: blue;
+}
+
+.pac-icon {
+  display: none;
+}
+
+.pac-container.pac-logo::after {
+  display: none;
+}
