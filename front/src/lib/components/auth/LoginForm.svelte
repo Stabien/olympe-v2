@@ -2,16 +2,25 @@
 	import AppInput from '../base/AppInput.svelte'
 	import AppButton from '../base/AppButton.svelte'
 	import { RocketSolid } from 'flowbite-svelte-icons'
-	import { minLength } from '$lib/operations/validators'
+	import { mustNotBeEmpty } from '$lib/utils/form/validationRules'
 	import AppForm from '../base/AppForm.svelte'
+	import { login } from '$lib/services/auth'
+
+	const validators = [mustNotBeEmpty()]
 
 	let loginPayload = {
 		email: '',
 		password: ''
 	}
 
-	const onSubmit = () => {
-		console.log('enter onSubmit')
+	const onSubmit = async () => {
+		try {
+			const response = await login(loginPayload)
+			const token = await response.json()
+			console.log(token)
+		} catch (e) {
+			console.error(e)
+		}
 	}
 </script>
 
@@ -28,10 +37,7 @@
 				placeholder="Email"
 				inputClass="p-3"
 				bind:value={loginPayload.email}
-				validation={{
-					validator: minLength(6),
-					errorMessage: 'Ce champ est obligatoire'
-				}}
+				{validators}
 			/>
 			<AppInput
 				type="password"
@@ -40,10 +46,7 @@
 				placeholder="Mot de passe"
 				inputClass="p-3"
 				bind:value={loginPayload.password}
-				validation={{
-					validator: minLength(6),
-					errorMessage: 'Ce champ est obligatoire'
-				}}
+				{validators}
 			/>
 		</div>
 		<AppButton class="mt-8 w-full py-3.5" type="submit">Se connecter</AppButton>

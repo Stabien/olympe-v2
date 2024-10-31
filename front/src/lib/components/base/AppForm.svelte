@@ -1,31 +1,27 @@
 <script lang="ts">
-	import { enableFieldErrors, hasValidationError } from '$lib/operations/validators'
-	import type { FieldValidation } from '$lib/types/validator'
+	import { enableFieldErrors, hasValidationError } from '$lib/utils/form/validation'
+	import type { FieldValidationState } from '$lib/types/validator'
 	import { setContext } from 'svelte'
 	import { writable } from 'svelte/store'
 
 	export let onSubmit: () => void
 
-	let fieldValidationStore = writable<Record<string, FieldValidation>>({})
+	let validationStore = writable<Record<string, FieldValidationState>>({})
 
-	const displayValidationErrors = () => {
-		const updatedFieldValidation = enableFieldErrors(fields)
-
-		fieldValidationStore.set(updatedFieldValidation)
+	const displayValidationErrors = (fields: Record<string, FieldValidationState>) => {
+		validationStore.set(enableFieldErrors(fields))
 	}
 
 	const handleSubmit = () => {
-		displayValidationErrors()
-
-		if (!hasValidationError(fields)) {
+		if (hasValidationError($validationStore)) {
+			displayValidationErrors($validationStore)
+		} else {
 			onSubmit()
 		}
 	}
 
-	$: fields = $fieldValidationStore
-
 	setContext('formValidation', {
-		fieldValidationStore
+		validationStore
 	})
 </script>
 

@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { computeFieldValidation } from '$lib/operations/validators'
-	import type { FieldValidationStore, FormValidation, InputValidation } from '$lib/types/validator'
+	import { getValidationError, updateValidationStore } from '$lib/utils/form/validation'
+	import type { FieldValidator, FormValidationContext } from '$lib/types/validator'
 	import { Input, Label, Helper } from 'flowbite-svelte'
 	import { getContext, onMount } from 'svelte'
-	import { get } from 'svelte/store'
 	import { slide } from 'svelte/transition'
 
 	export let id: string = ''
@@ -12,30 +11,16 @@
 	export let divClass: string = ''
 	export let labelClass: string = ''
 	export let inputClass: string = ''
-	export let validation: InputValidation | undefined = undefined
+	export let validators: FieldValidator[] = []
 
-	const formValidationContext = getContext('formValidation') as FormValidation
-	const fieldValidationStore = formValidationContext?.fieldValidationStore
+	const formValidationContext = getContext<FormValidationContext>('formValidation')
+	const validationStore = formValidationContext?.validationStore
 
-	const updateFieldValidation = (
-		isValid: boolean,
-		fieldValidationStore: undefined | FieldValidationStore
-	) => {
-		if (!fieldValidationStore) {
-			return
-		}
+	$: validationError = getValidationError(validators, value)
+	$: canDisplayError = $validationStore[id]?.canDisplayError
+	$: hasError = validationError && canDisplayError
 
-		const fields = get(fieldValidationStore)
-		const updatedFieldValidation = computeFieldValidation(fields, id, isValid)
-
-		fieldValidationStore.set(updatedFieldValidation)
-	}
-
-	$: isValid = !validation || validation.validator(value)
-	$: canDisplayError = $fieldValidationStore && $fieldValidationStore[id]?.canDisplayError
-	$: isErrorDisplayed = !isValid && canDisplayError
-
-	onMount(() => updateFieldValidation(isValid, fieldValidationStore))
+	onMount(() => updateValidationStore(validationStore, id, !validationError))
 </script>
 
 <div class="flex flex-col {divClass} space-y-1">
@@ -43,15 +28,15 @@
 	<Input
 		{id}
 		class={inputClass}
-		color={isErrorDisplayed ? 'red' : 'base'}
+		color={hasError ? 'red' : 'base'}
 		bind:value
-		on:input={() => updateFieldValidation(isValid, fieldValidationStore)}
+		on:input={() => updateValidationStore(validationStore, id, !validationError)}
 		{...$$restProps}
 	/>
 
-	{#if isErrorDisplayed}
+	{#if hasError}
 		<div transition:slide={{ duration: 300 }}>
-			<Helper color="red">{validation?.errorMessage}</Helper>
+			<Helper color="red">{validationError ?? ''}</Helper>
 		</div>
 	{/if}
 </div>

@@ -1,17 +1,17 @@
 import type { Writable } from "svelte/store"
 
-export interface InputValidation {
-  validator: (value: string) => boolean
-  errorMessage: string
+export interface FieldValidator {
+  rule: (value: string) => boolean
+  message: string
 }
 
-export interface FieldValidation {
+export interface FieldValidationState {
   isValid: boolean
   canDisplayError: boolean
 }
 
-export type FieldValidationStore = Writable<Record<string, FieldValidation>>
+export type ValidationStore = Writable<Record<string, FieldValidationState>>
 
-export interface FormValidation {
-  fieldValidationStore: FieldValidationStore
+export interface FormValidationContext {
+  validationStore: ValidationStore
 }
