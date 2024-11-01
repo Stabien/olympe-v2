@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { computeMealCalories } from '$lib/operations/meal'
+	import { computeMealCalories } from '$lib/utils/meal'
 	import { defaultMeal } from '../../../fixtures'
 	import type { Meal } from '$lib/types'
 	import AppCard from '$lib/components/base/AppCard.svelte'

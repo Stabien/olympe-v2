@@ -67,4 +67,8 @@ export interface Meal {
   foodstuff: FoodstuffWithQuantity[]
 }
 
+export interface WithId {
+  id: string
+}
+
 export * from './auth'

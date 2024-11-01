@@ -5,6 +5,8 @@
 	import { mustNotBeEmpty } from '$lib/utils/form/validationRules'
 	import AppForm from '../base/AppForm.svelte'
 	import { login } from '$lib/services/auth'
+	import { userStore } from '$lib/stores/userStore'
+	import { goto } from '$app/navigation'
 
 	const validators = [mustNotBeEmpty()]
 
@@ -13,13 +15,28 @@
 		password: ''
 	}
 
+	const onLoginSuccess = (token: string) => {
+		userStore.set({ ...$userStore, token })
+		goto('/app/dashboard')
+	}
+
+	const onLoginFailure = () => {
+
+	}
+
 	const onSubmit = async () => {
 		try {
 			const response = await login(loginPayload)
 			const token = await response.json()
-			console.log(token)
+
+			if (response.status !== 200) {
+				onLoginFailure()
+			} else {
+				onLoginSuccess(token)
+			}
 		} catch (e) {
-			console.error(e)
+			console.log(e)
+			throw new Error('error')
 		}
 	}
 </script>

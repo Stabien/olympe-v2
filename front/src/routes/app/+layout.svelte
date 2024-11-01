@@ -41,7 +41,7 @@
 
 <main class="flex h-full w-full flex-row">
 	<Navbar {routes} />
-	<section class="w-full px-12 py-5">
+	<section class="w-full bg-slate-50 px-12 py-5">
 		<slot />
 	</section>
 </main>
