@@ -13,12 +13,11 @@
 	export let inputClass: string = ''
 	export let validators: FieldValidator[] = []
 
-	const formValidationContext = getContext<FormValidationContext>('formValidation')
-	const validationStore = formValidationContext?.validationStore
+	const { validationStore } = getContext<FormValidationContext>('formValidation') ?? {}
 
 	$: validationError = getValidationError(validators, value)
-	$: canDisplayError = $validationStore[id]?.canDisplayError
-	$: hasError = validationError && canDisplayError
+	$: canDisplayError = Boolean($validationStore?.[id]?.canDisplayError)
+	$: isErrorVisible = Boolean(validationError && canDisplayError)
 
 	onMount(() => updateValidationStore(validationStore, id, !validationError))
 </script>
@@ -28,13 +27,13 @@
 	<Input
 		{id}
 		class={inputClass}
-		color={hasError ? 'red' : 'base'}
+		color={isErrorVisible ? 'red' : 'base'}
 		bind:value
 		on:input={() => updateValidationStore(validationStore, id, !validationError)}
 		{...$$restProps}
 	/>
 
-	{#if hasError}
+	{#if isErrorVisible}
 		<div transition:slide={{ duration: 300 }}>
 			<Helper color="red">{validationError ?? ''}</Helper>
 		</div>
