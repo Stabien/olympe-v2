@@ -54,5 +54,6 @@ export const getValidationError = (validators: FieldValidator[], fieldValue: str
       return validator.message
     }
   }
+
   return null
 }
