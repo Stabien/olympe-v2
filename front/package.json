@@ -44,6 +44,7 @@
 	"type": "module",
 	"dependencies": {
 		"flowbite-svelte-icons": "^1.5.0",
-		"tailwind-merge": "^2.2.2"
+		"tailwind-merge": "^2.2.2",
+		"uuid": "^11.0.3"
 	}
 }
