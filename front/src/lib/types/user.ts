@@ -1,7 +1,5 @@
 import type { WithId } from ".";
 
-
-
 export interface User extends WithId {
   email: string
   firstname: string
