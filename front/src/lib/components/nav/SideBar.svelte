@@ -10,11 +10,11 @@
 
 <Sidebar
 	{activeUrl}
-	class="z-40 h-screen w-72 -translate-x-full transition-transform sm:translate-x-0"
+	class="z-40 h-screen w-96 -translate-x-full transition-transform sm:translate-x-0 px-4"
 >
 	<SidebarWrapper class="h-full bg-white p-0">
 		<SidebarGroup class="mt-3">
-			<SidebarItem label="Olympe" class="px-6 py-3">
+			<SidebarItem label="Olympe" class="mx-3 px-4 py-3">
 				<RocketSolid slot="icon" />
 			</SidebarItem>
 		</SidebarGroup>
@@ -22,7 +22,7 @@
 			{#each routes as route}
 				<SidebarItem
 					label={route.label}
-					class="mx-3 rounded-lg px-6 py-3 {activeUrl !== route.path ? 'hover:bg-slate-100' : ''}"
+					class="mx-3 rounded-md px-4 py-3 {activeUrl !== route.path ? 'hover:bg-slate-100' : ''} text-md"
 					href={route.path}
 					active={activeUrl === route.path}
 					activeClass="flex items-center bg-primary-600 text-white"
