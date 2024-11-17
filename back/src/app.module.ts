@@ -12,6 +12,7 @@ import { FoodstuffsModule } from './foodstuffs/foodstuffs.module'
 import { BodyweightModule } from './bodyweight/bodyweight.module'
 import { ProgramsModule } from './programs/programs.module'
 import { AuthModule } from './auth/auth.module'
+import { IsUniqueConstraint } from './shared/validators/unique.validator'
 
 @Module({
   imports: [
@@ -27,6 +28,6 @@ import { AuthModule } from './auth/auth.module'
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, IsUniqueConstraint],
 })
 export class AppModule {}

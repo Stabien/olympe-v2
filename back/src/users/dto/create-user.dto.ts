@@ -1,7 +1,9 @@
 import { IsEmail, IsString, Length } from 'class-validator'
+import { IsUnique } from 'src/shared/decorators/unique.decorator'
 
 export class CreateUserDto {
   @IsEmail()
+  @IsUnique({ tableName: 'user', column: 'email' })
   email: string
 
   @IsString()
