@@ -20,9 +20,7 @@
 		}
 	}
 
-	setContext('formValidation', {
-		validationStore
-	})
+	setContext('formValidation', validationStore)
 </script>
 
 <form on:submit|preventDefault={handleSubmit} {...$$restProps}>

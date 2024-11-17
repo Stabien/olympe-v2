@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getValidationError, updateValidationStore } from '$lib/utils/form/validation'
-	import type { FieldValidator, FormValidationContext } from '$lib/types/validator'
+	import type { FieldValidator, ValidationStore } from '$lib/types/validator'
 	import { Input, Label, Helper } from 'flowbite-svelte'
 	import { getContext, onMount } from 'svelte'
 	import { slide } from 'svelte/transition'
@@ -13,7 +13,7 @@
 	export let inputClass: string = ''
 	export let validators: FieldValidator[] = []
 
-	const { validationStore } = getContext<FormValidationContext>('formValidation') ?? {}
+	const validationStore = getContext<ValidationStore>('formValidation')
 
 	$: validationError = getValidationError(validators, value)
 	$: canDisplayError = Boolean($validationStore?.[id]?.canDisplayError)
@@ -26,7 +26,7 @@
 	<Label class={labelClass} for={id}>{label}</Label>
 	<Input
 		{id}
-		class={inputClass}
+		class="p-3 {inputClass}"
 		color={isErrorVisible ? 'red' : 'base'}
 		bind:value
 		on:input={() => updateValidationStore(validationStore, id, !validationError)}

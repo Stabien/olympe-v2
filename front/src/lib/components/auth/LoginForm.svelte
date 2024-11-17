@@ -5,42 +5,35 @@
 	import { mustNotBeEmpty } from '$lib/utils/form/validationRules'
 	import AppForm from '../base/AppForm.svelte'
 	import { login } from '$lib/services/auth'
-	import { updateUserStore } from '$lib/stores/userStore'
-	import { goto } from '$app/navigation'
+	import { updateUserStore, userStore } from '$lib/stores/userStore'
 	import { showToast, ToastType } from '$lib/stores/toastStore'
 	import type { LoginPayload } from '$lib/types'
 	import { defaultErrorMessage, getHttpErrorMessage } from '$lib/utils/error'
 
-	const validators = [mustNotBeEmpty()]
+	export let onSuccess: () => void
 
-	let loginPayload = {
-		email: '',
-		password: ''
-	}
+	const onLoginSuccess = async (response: Response) => {
+		const { token } = await response.json()
 
-	let isLoading = false
-
-	const onLoginSuccess = (token: string) => {
 		updateUserStore({ token })
-		goto('/app/dashboard')
+		console.log($userStore)
+		onSuccess()
 	}
 
-	const onLoginFailure = (status: number) => {
+	const onLoginError = (status: number) => {
 		const errorMessage = getHttpErrorMessage('login', status)
 
 		showToast(errorMessage, ToastType.ERROR)
 	}
 
-	const authentication = async (loginPayload: LoginPayload) => {
+	const handleSubmit = async (loginForm: LoginPayload) => {
 		try {
-			const response = await login(loginPayload)
+			const response = await login(loginForm)
 
 			if (response.ok) {
-				const { token } = await response.json()
-
-				onLoginSuccess(token)
+				onLoginSuccess(response)
 			} else {
-				onLoginFailure(response.status)
+				onLoginError(response.status)
 			}
 		} catch (e) {
 			throw new Error(defaultErrorMessage)
@@ -51,11 +44,18 @@
 		isLoading = true
 
 		try {
-			await authentication(loginPayload)
+			await handleSubmit(loginForm)
 		} finally {
 			isLoading = false
 		}
 	}
+
+	let loginForm = {
+		email: '',
+		password: ''
+	}
+
+	let isLoading = false
 </script>
 
 <AppForm class="shadow-xxl m-auto w-[28rem] rounded-md bg-white p-8 shadow-lg" {onSubmit}>
@@ -68,22 +68,20 @@
 			label="Email"
 			id="email"
 			placeholder="Email"
-			inputClass="p-3"
-			bind:value={loginPayload.email}
-			{validators}
+			bind:value={loginForm.email}
+			validators={[mustNotBeEmpty()]}
 		/>
 		<AppInput
 			type="password"
 			label="Mot de passe"
 			id="password"
 			placeholder="Mot de passe"
-			inputClass="p-3"
-			bind:value={loginPayload.password}
-			{validators}
+			bind:value={loginForm.password}
+			validators={[mustNotBeEmpty()]}
 		/>
 	</div>
 	<AppButton class="mt-8 w-full py-3.5" type="submit" {isLoading}>Se connecter</AppButton>
-	<a href="/auth/registration" class="mx-auto mt-4 block w-fit text-sm font-medium text-primary-500"
+	<a href="/auth/register" class="mx-auto mt-4 block w-fit text-sm font-medium text-primary-500"
 		>Inscrivez-vous dès maintenant !</a
 	>
 </AppForm>
