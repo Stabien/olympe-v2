@@ -4,51 +4,7 @@
 	import { RocketSolid } from 'flowbite-svelte-icons'
 	import { mustNotBeEmpty } from '$lib/utils/form/validationRules'
 	import AppForm from '../base/AppForm.svelte'
-	import { login } from '$lib/services/auth'
-	import { updateUserStore, userStore } from '$lib/stores/userStore'
-	import { showToast, ToastType } from '$lib/stores/toastStore'
-	import type { LoginPayload } from '$lib/types'
-	import { defaultErrorMessage, getHttpErrorMessage } from '$lib/utils/error'
-
-	export let onSuccess: () => void
-
-	const onLoginSuccess = async (response: Response) => {
-		const { token } = await response.json()
-
-		updateUserStore({ token })
-		console.log($userStore)
-		onSuccess()
-	}
-
-	const onLoginError = (status: number) => {
-		const errorMessage = getHttpErrorMessage('login', status)
-
-		showToast(errorMessage, ToastType.ERROR)
-	}
-
-	const handleSubmit = async (loginForm: LoginPayload) => {
-		try {
-			const response = await login(loginForm)
-
-			if (response.ok) {
-				onLoginSuccess(response)
-			} else {
-				onLoginError(response.status)
-			}
-		} catch (e) {
-			throw new Error(defaultErrorMessage)
-		}
-	}
-
-	const onSubmit = async () => {
-		isLoading = true
-
-		try {
-			await handleSubmit(loginForm)
-		} finally {
-			isLoading = false
-		}
-	}
+	import { login } from '$lib/stores/user/userActions'
 
 	let loginForm = {
 		email: '',
@@ -56,6 +12,16 @@
 	}
 
 	let isLoading = false
+
+	const onSubmit = async () => {
+		isLoading = true
+
+		try {
+			await login(loginForm)
+		} finally {
+			isLoading = false
+		}
+	}
 </script>
 
 <AppForm class="shadow-xxl m-auto w-[28rem] rounded-md bg-white p-8 shadow-lg" {onSubmit}>

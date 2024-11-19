@@ -1,13 +1,13 @@
 import type { LoginPayload, RegisterPayload } from '$lib/types'
-import api from './api'
+import api from './apiService'
 
-export const login = async (loginPayload: LoginPayload) => {
+export const loginService = async (loginPayload: LoginPayload) => {
 	return await api.post('/auth/login', loginPayload, {
 		'Content-Type': 'application/json'
 	})
 }
 
-export const register = async (registerPayload: RegisterPayload) => {
+export const registerService = async (registerPayload: RegisterPayload) => {
 	return await api.post('/auth/register', registerPayload, {
 		'Content-Type': 'application/json'
 	})

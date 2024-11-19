@@ -2,52 +2,9 @@
 	import AppInput from '../base/AppInput.svelte'
 	import AppButton from '../base/AppButton.svelte'
 	import { RocketSolid } from 'flowbite-svelte-icons'
-	import { defaultErrorMessage, getHttpErrorMessage } from '$lib/utils/error'
-	import { showToast, ToastType } from '$lib/stores/toastStore'
 	import { mustBeEmail, mustEqual, mustNotBeEmpty } from '$lib/utils/form/validationRules'
 	import AppForm from '../base/AppForm.svelte'
-	import type { RegisterPayload } from '$lib/types'
-	import { register } from '$lib/services/auth'
-	import { updateUserStore } from '$lib/stores/userStore'
-
-	export let onSuccess: () => void
-
-	const onRegisterSuccess = async (response: Response) => {
-		const { token } = await response.json()
-
-		updateUserStore({ token })
-		onSuccess()
-	}
-
-	const onRegisterError = (status: number) => {
-		const errorMessage = getHttpErrorMessage('register', status)
-
-		showToast(errorMessage, ToastType.ERROR)
-	}
-
-	const handleSubmit = async (registerForm: RegisterPayload) => {
-		try {
-			const response = await register(registerForm)
-
-			if (response.ok) {
-				onRegisterSuccess(response)
-			} else {
-				onRegisterError(response.status)
-			}
-		} catch (e) {
-			throw new Error(defaultErrorMessage)
-		}
-	}
-
-	const onSubmit = async () => {
-		isLoading = true
-
-		try {
-			await handleSubmit(registerForm)
-		} finally {
-			isLoading = false
-		}
-	}
+	import { register } from '$lib/stores/user/userActions'
 
 	let registerForm = {
 		firstname: '',
@@ -58,6 +15,16 @@
 	}
 
 	let isLoading = false
+
+	const onSubmit = async () => {
+		isLoading = true
+
+		try {
+			await register(registerForm)
+		} finally {
+			isLoading = false
+		}
+	}
 </script>
 
 <AppForm {onSubmit} class="shadow-xxl m-auto w-[28rem] rounded-md bg-white p-8 shadow-lg">
