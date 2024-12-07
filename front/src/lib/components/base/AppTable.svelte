@@ -1,6 +1,5 @@
 <script lang="ts">
 	import {
-		Button,
 		Pagination,
 		Table,
 		TableBody,
@@ -19,47 +18,51 @@
 	export let actionButtonLabel: string | undefined = undefined
 </script>
 
-<Table hoverable={true} shadow>
-	<TableHead>
-		{#each columns as column}
-			<TableHeadCell>{column.label}</TableHeadCell>
-		{/each}
-		{#if hasActionButton}
-			<TableHeadCell></TableHeadCell>
-		{/if}
-	</TableHead>
-	<TableBody tableBodyClass="divide-y">
-		{#each rows as row}
-			<TableBodyRow>
-				{#each columns as column}
-					<TableBodyCell>{row[column.key]}</TableBodyCell>
-				{/each}
-				{#if hasActionButton}
-					<TableBodyCell tdClass="w-fit pr-3">
-						<div class="mx-auto mr-0 w-fit">
-							<AppButton on:click={onActionButtonClick} size="xs">{actionButtonLabel}</AppButton>
-						</div>
-					</TableBodyCell>
-				{/if}
-			</TableBodyRow>
-		{/each}
-	</TableBody>
-	<tfoot class="w-full">
-		<tr>
-			<th colspan={columns.length + 1} class="p-3">
-				<div class="mx-auto mr-0 w-fit">
-					<Pagination>
-						<svelte:fragment slot="prev">
-							<span class="sr-only">Previous</span>
-							<ChevronLeftOutline class="h-6 w-6" />
-						</svelte:fragment>
-						<svelte:fragment slot="next">
-							<span class="sr-only">Next</span>
-							<ChevronRightOutline class="h-6 w-6" />
-						</svelte:fragment>
-					</Pagination>
-				</div>
-			</th>
-		</tr>
-	</tfoot>
-</Table>
+<div class="overflow-hidden rounded-md shadow-md">
+	<Table hoverable={true} class="text-xs">
+		<TableHead class="border-b-[0.0625rem]">
+			{#each columns as column}
+				<TableHeadCell>{column.label}</TableHeadCell>
+			{/each}
+			{#if hasActionButton}
+				<TableHeadCell></TableHeadCell>
+			{/if}
+		</TableHead>
+		<TableBody tableBodyClass="divide-y">
+			{#each rows as row}
+				<TableBodyRow>
+					{#each columns as column}
+						<TableBodyCell>{row[column.key]}</TableBodyCell>
+					{/each}
+					{#if hasActionButton}
+						<TableBodyCell tdClass="w-fit pr-3">
+							<div class="mx-auto mr-0 w-fit">
+								<AppButton on:click={onActionButtonClick} size="xs" color="alternative"
+									>{actionButtonLabel}</AppButton
+								>
+							</div>
+						</TableBodyCell>
+					{/if}
+				</TableBodyRow>
+			{/each}
+		</TableBody>
+		<tfoot class="rounded-sm border-t-[0.0625rem] bg-slate-50">
+			<tr>
+				<th colspan={columns.length + 1} class="p-3">
+					<div class="mx-auto mr-0 w-fit">
+						<Pagination>
+							<svelte:fragment slot="prev">
+								<span class="sr-only">Previous</span>
+								<ChevronLeftOutline class="h-6 w-6" />
+							</svelte:fragment>
+							<svelte:fragment slot="next">
+								<span class="sr-only">Next</span>
+								<ChevronRightOutline class="h-6 w-6" />
+							</svelte:fragment>
+						</Pagination>
+					</div>
+				</th>
+			</tr>
+		</tfoot>
+	</Table>
+</div>

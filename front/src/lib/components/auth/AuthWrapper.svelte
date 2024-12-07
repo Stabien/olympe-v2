@@ -12,7 +12,7 @@
 	})
 
 	onDestroy(() => {
-		unsubscribe()
+		unsubscribe?.()
 	})
 </script>
 

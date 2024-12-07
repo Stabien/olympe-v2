@@ -1,15 +1,15 @@
 <script lang="ts">
-	import AppSelect from '../base/AppSelect.svelte';
-	import { defaultProgram, defaultSession, exerciseColumns } from '../../../fixtures';
-	import AppInput from '../base/AppInput.svelte';
-	import { Textarea } from 'flowbite-svelte';
+	import AppSelect from '../base/AppSelect.svelte'
+	import { defaultProgram, exerciseColumns } from '../../../fixtures'
+	import AppInput from '../base/AppInput.svelte'
+	import { Textarea } from 'flowbite-svelte'
 
 	const options = defaultProgram.map((session) => ({
 		name: session.name,
 		value: session.name
-	}));
+	}))
 
-	let selected = options[0].value;
+	let selected = options[0].value
 </script>
 
 <div class="flex flex-col justify-between py-1">

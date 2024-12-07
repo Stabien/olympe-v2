@@ -4,6 +4,7 @@ export const getToken = () => {
 	if (browser) {
 		return localStorage.getItem('token')
 	}
+
 	return null
 }
 

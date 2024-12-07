@@ -1,24 +1,24 @@
 <script lang="ts">
+	import type { SelectOption } from '$lib/types/input'
 	import { Label, Select } from 'flowbite-svelte'
-	import type { SelectOption } from '$lib/types'
 
 	export let label: string = ''
 	export let id: string = ''
-	export let selected: any
-	export let items: SelectOption[] = []
+	export let value: any
+	export let options: SelectOption[] = []
 	export let defaultSelected: string | undefined = undefined
 	export let divClass: string = ''
 
-	const isSelected = (item: SelectOption) => {
-		return item.value === defaultSelected
+	const isSelected = (option: SelectOption) => {
+		return option.value === defaultSelected
 	}
 </script>
 
 <div class="flex flex-col {divClass}">
 	<Label for={id}>{label}</Label>
-	<Select {id} bind:value={selected} {...$$restProps} {items}>
-		{#each items as item}
-			<option value={item.value} selected={isSelected(item)}>{item.name}</option>
+	<Select {id} bind:value {...$$restProps} {options}>
+		{#each options as option}
+			<option value={option.value} selected={isSelected(option)}>{option.label}</option>
 		{/each}
 	</Select>
 </div>

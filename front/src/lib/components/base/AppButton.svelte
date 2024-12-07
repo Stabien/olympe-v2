@@ -6,7 +6,7 @@
 
 <Button
 	{...$$restProps}
-	class="h-12 duration-200 {$$restProps.class} ring-0 focus-within:ring-0"
+	class="duration-200 {$$restProps.class} ring-0 focus-within:ring-0"
 	on:click
 >
 	{#if isLoading}

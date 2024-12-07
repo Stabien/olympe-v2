@@ -1,14 +1,9 @@
 <script lang="ts">
-	import { exerciseResult } from '../../../fixtures';
-	import AppTable from '../base/AppTable.svelte';
+	import { exerciseResult } from '../../../fixtures'
+	import AppCard from '../base/AppCard.svelte'
+	import AppTable from '../base/AppTable.svelte'
 
-	export let rows = [
-		exerciseResult,
-		exerciseResult,
-		exerciseResult,
-		exerciseResult,
-		exerciseResult
-	];
+	export let rows = [exerciseResult, exerciseResult, exerciseResult, exerciseResult, exerciseResult]
 
 	const columns = [
 		{
@@ -31,7 +26,9 @@
 			key: 'restTime',
 			label: 'Temps de repos'
 		}
-	];
+	]
 </script>
 
-<AppTable {rows} {columns} />
+<AppCard>
+	<AppTable {rows} {columns} />
+</AppCard>

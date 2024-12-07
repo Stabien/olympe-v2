@@ -1,5 +1,6 @@
 <script lang="ts">
-	import AppTable from '../base/AppTable.svelte';
+	import AppCard from '../base/AppCard.svelte'
+	import AppTable from '../base/AppTable.svelte'
 
 	export let rows = [
 		{
@@ -34,7 +35,7 @@
 			date: '21/05/2024',
 			sessionType: 'Pull'
 		}
-	];
+	]
 
 	const columns = [
 		{
@@ -45,16 +46,18 @@
 			key: 'sessionType',
 			label: 'Séance'
 		}
-	];
+	]
 
-	const detailButtonLabel = 'Voir le détail';
-	const onDetailButtonClick = () => console.log('test');
+	const detailButtonLabel = 'Voir le détail'
+	const onDetailButtonClick = () => console.log('test')
 </script>
 
-<AppTable
-	{rows}
-	{columns}
-	hasActionButton
-	onActionButtonClick={onDetailButtonClick}
-	actionButtonLabel={detailButtonLabel}
-/>
+<AppCard class="sm:p-0">
+	<AppTable
+		{rows}
+		{columns}
+		hasActionButton
+		onActionButtonClick={onDetailButtonClick}
+		actionButtonLabel={detailButtonLabel}
+	/>
+</AppCard>

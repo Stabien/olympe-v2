@@ -1,36 +1,27 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte'
-	import { RocketSolid } from 'flowbite-svelte-icons'
+	import { Sidebar, SidebarBrand, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte'
 
 	export let routes: any[]
 
 	$: activeUrl = $page.url.pathname
 </script>
 
-<Sidebar
-	{activeUrl}
-	class="z-40 h-screen w-96 -translate-x-full transition-transform sm:translate-x-0 px-4"
->
+<Sidebar {activeUrl} class="z-40 min-h-screen w-96 border-slate-200 px-4 pt-8">
 	<SidebarWrapper class="h-full bg-white p-0">
-		<SidebarGroup class="mt-3">
-			<SidebarItem label="Olympe" class="mx-3 px-4 py-3">
-				<RocketSolid slot="icon" />
-			</SidebarItem>
-		</SidebarGroup>
-		<SidebarGroup border>
+		<SidebarGroup>
 			{#each routes as route}
 				<SidebarItem
 					label={route.label}
-					class="mx-3 rounded-md px-4 py-3 {activeUrl !== route.path ? 'hover:bg-slate-100' : ''} text-md"
+					class="mx-3 rounded-md px-4 py-3 {activeUrl !== route.path
+						? 'hover:bg-slate-100'
+						: ''} text-md"
 					href={route.path}
 					active={activeUrl === route.path}
 					activeClass="flex items-center bg-primary-600 text-white"
 					nonActiveClass="flex items-center text-base text-black-300"
 				>
-					<svelte:fragment slot="icon">
-						<svelte:component this={route.icon} />
-					</svelte:fragment>
+					<svelte:component this={route.icon} slot="icon" />
 				</SidebarItem>
 			{/each}
 		</SidebarGroup>

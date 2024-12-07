@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Card } from 'flowbite-svelte';
+	import { Card } from 'flowbite-svelte'
 </script>
 
-<Card class="app-shadow" {...$$restProps}>
+<Card {...$$restProps} class="rounded-md {$$restProps.class}">
 	<slot />
 </Card>

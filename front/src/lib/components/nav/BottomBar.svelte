@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { BottomNav, BottomNavItem } from 'flowbite-svelte';
-	import type { SvelteComponent } from 'svelte';
+	import { BottomNav, BottomNavItem } from 'flowbite-svelte'
+	import type { SvelteComponent } from 'svelte'
 
-	export let routes: SvelteComponent[];
+	export let routes: SvelteComponent[]
 </script>
 
-<BottomNav position="absolute" classInner="grid-cols-4">
+<BottomNav position="fixed" classInner="grid-cols-4">
 	{#each routes as route}
 		<BottomNavItem btnName={route.label}>
 			<svelte:component
